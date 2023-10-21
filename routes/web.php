@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,4 +15,49 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::resource('products', ProductController::class);
+
+
+// Route hiển thị sản phẩm
+Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+
+// Route hiển thị form tạo sản phẩm mới
+Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
+
+// Route lưu trữ sản phẩm mới được tạo
+Route::post('/products', [ProductController::class, 'store'])->name('products.store');
+
+// Route hiển thị thông tin chi tiết về một sản phẩm
+Route::get('/products/{id}', [ProductController::class, 'show'])->name('products.show');
+
+// Route hiển thị form chỉnh sửa thông tin sản phẩm
+Route::get('/products/{id}/edit', [ProductController::class, 'edit'])->name('products.edit');
+
+// Route cập nhật thông tin sản phẩm đã chỉnh sửa
+Route::put('/products/{id}', [ProductController::class, 'update'])->name('products.update');
+
+// Route xóa một sản phẩm
+Route::delete('/products/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
+
+// Route tìm kiếm sản phẩm theo tiêu đề
+Route::post('/products/search', [ProductController::class, 'search'])->name('products.search');
+
+// Route hiển thị sản phẩm danh mục
+Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
+
+// Route hiển thị form tạo danh mục mới
+Route::get('/categories/create', [CategoryController::class, 'create'])->name('categories.create');
+
+// Route lưu trữ danh mục mới được tạo
+Route::post('/categories', [CategoryController::class, 'store'])->name('categories.store');
+
+// Route hiển thị thông tin chi tiết về một danh mục
+Route::get('/categories/{id}', [CategoryController::class, 'show'])->name('categories.show');
+
+// Route hiển thị form chỉnh sửa thông tin danh mục
+Route::get('/categories/{id}/edit', [CategoryController::class, 'edit'])->name('categories.edit');
+
+// Route cập nhật thông tin danh mục đã chỉnh sửa
+Route::put('/categories/{id}', [CategoryController::class, 'update'])->name('categories.update');
+
+// Route xóa một danh mục
+Route::delete('/categories/{id}', [CategoryController::class, 'destroy'])->name('categories.destroy');

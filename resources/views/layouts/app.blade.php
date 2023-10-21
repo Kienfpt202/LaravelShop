@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Title</title>
+  <title>@yield('title')</title>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -15,28 +15,10 @@
 
 <body>
   <header>
-    <!-- place navbar here -->
+    @include('layouts.header')
   </header>
   <main>
-    <form action="/products/{{$product->id}}" method="post">
-        @csrf
-        @method('PUT')
-        <div class="mb-3">
-          <label for="" class="form-label">Name</label>
-          <input type="text"
-            class="form-control" name="name" id="name" aria-describedby="helpId" placeholder="" value="{{$product->name}}">
-        </div>
-        <div class="mb-3">
-          <label for="" class="form-label">Price</label>
-          <input type="text"
-            class="form-control" name="price" id="price" aria-describedby="helpId" placeholder="" value="{{$product->price}}">
-        </div>
-        <div class="mb-3">
-          <label for="" class="form-label">Description</label>
-          <textarea class="form-control" name="description" id="description" rows="3">{{$product->price}}</textarea>
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+    @yield('content')
   </main>
   <footer>
     <!-- place footer here -->

@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('name', 'Products Index')
+@section('title', 'Products Index')
 @section('content')
 <div class="table-responsive">
   <table class="table table-primary">
@@ -8,6 +8,8 @@
               <th scope="col">Name</th>
               <th scope="col">Price</th>
               <th scope="col">Description</th>
+              <th>Category</th>
+              <!-- <th>Tags</th> -->
               <th>Action</th>
           </tr>
       </thead>
@@ -17,9 +19,14 @@
                   <td>
                       <a href="/products/{{$product->id}}">{{$product->name}}</a>
                   </td>
-                  <td>{{ $product->image }}</td>
                   <td>{{ $product->price }}</td>
                   <td>{{ $product->description }}</td>
+                  <td>{{ $product->category->name }}</td>
+                  <!-- <td>
+                      @foreach ($book->tags as $tag)
+                          <span class="badge bg-primary">{{ $tag->name }}</span>
+                      @endforeach
+                  </td> -->
                   <td>
                       <a href="/products/{{$product->id}}/edit">
                           <button type="button" class="btn btn-primary">Edit</button>
