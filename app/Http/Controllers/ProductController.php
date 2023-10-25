@@ -57,8 +57,7 @@ class ProductController extends Controller
         $product = product::find($id);
         $categories = Category::all();
         $tags = Tag::all();
-        return view('products.edit', compact('product', 'categories',
-        //  'tags'
+        return view('products.edit', compact('product', 'categories','tags'
         ));
     }
 

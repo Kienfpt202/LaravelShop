@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rules\Unique;
 
 class TagController extends Controller
 {
@@ -12,7 +13,8 @@ class TagController extends Controller
      */
     public function index()
     {
-        //
+        $tags = Tag::all();
+        return view('tags.index', ['tags' => $tags]);
     }
 
     /**
@@ -20,7 +22,7 @@ class TagController extends Controller
      */
     public function create()
     {
-        //
+        return view("tags.create");
     }
 
     /**
@@ -28,38 +30,36 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|max:255',
+        ]);
+
+        Tag::create($validatedData);
+
+        return redirect()->route('tags.index')->with('success', 'Tag created successfully.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Tag $tag)
+    public function edit($id)
     {
-        //
+        $tag = Tag::findOrFail($id);
+        return view('tags.edit', ['tag' => $tag]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Tag $tag)
+    public function update(Request $request, $id)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|max:255',
+        ]);
+
+        $tag = Tag::findOrFail($id);
+        $tag->update($validatedData);
+
+        return redirect()->route('tags.index')->with('success', 'Tag updated successfully.');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Tag $tag)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Tag $tag)
     {
-        //
+        $tag->delete();
+    return redirect()->route('tags.index')->with('success', 'Tag deleted successfully.');
     }
 }

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\TagController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -61,3 +62,24 @@ Route::put('/categories/{id}', [CategoryController::class, 'update'])->name('cat
 
 // Route xóa một danh mục
 Route::delete('/categories/{id}', [CategoryController::class, 'destroy'])->name('categories.destroy');
+
+// Lấy tất cả các tag
+Route::get('/tags', [TagController::class, 'index'])->name('tags.index');
+
+// Hiển thị form tạo mới tag
+Route::get('/tags/create', [TagController::class, 'create'])->name('tags.create');
+
+// Lưu tag mới được tạo
+Route::post('/tags', [TagController::class, 'store'])->name('tags.store');
+
+// Hiển thị thông tin chi tiết của một tag cụ thể
+Route::get('/tags/{id}', [TagController::class, 'show'])->name('tags.show');
+
+// Hiển thị form chỉnh sửa tag
+Route::get('/tags/{id}/edit', [TagController::class, 'edit'])->name('tags.edit');
+
+// Cập nhật thông tin của tag đã chỉnh sửa
+Route::put('/tags/{id}', [TagController::class, 'update'])->name('tags.update');
+
+// Xóa tag
+Route::delete('/tags/{id}', [TagController::class, 'destroy'])->name('tags.destroy');

@@ -9,7 +9,7 @@
               <th scope="col">Price</th>
               <th scope="col">Description</th>
               <th>Category</th>
-              <!-- <th>Tags</th> -->
+              <th>Tags</th>
               <th>Action</th>
           </tr>
       </thead>
@@ -22,11 +22,11 @@
                   <td>{{ $product->price }}</td>
                   <td>{{ $product->description }}</td>
                   <td>{{ $product->category->name }}</td>
-                  <!-- <td>
-                      @foreach ($book->tags as $tag)
+                  <td>
+                      @foreach ($product->tags as $tag)
                           <span class="badge bg-primary">{{ $tag->name }}</span>
                       @endforeach
-                  </td> -->
+                  </td>
                   <td>
                       <a href="/products/{{$product->id}}/edit">
                           <button type="button" class="btn btn-primary">Edit</button>

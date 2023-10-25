@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Title</title>
+  <title>Edit Product</title>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -19,23 +19,34 @@
   </header>
   <main>
     <form action="/products/{{$product->id}}" method="post">
-        @csrf
-        @method('PUT')
-        <div class="mb-3">
-          <label for="" class="form-label">Name</label>
-          <input type="text"
-            class="form-control" name="name" id="name" aria-describedby="helpId" placeholder="" value="{{$product->name}}">
+      @csrf
+      @method('PUT')
+      <div class="mb-3">
+        <label for="name" class="form-label">Name</label>
+        <input type="text"
+          class="form-control" name="name" id="name" aria-describedby="helpId" placeholder="" value="{{$product->name}}">
+      </div>
+      <div class="mb-3">
+        <label for="price" class="form-label">Price</label>
+        <input type="text"
+          class="form-control" name="price" id="price" aria-describedby="helpId" placeholder="" value="{{$product->price}}">
+      </div>
+      <div class="mb-3">
+        <label for="tags" class="form-label">Tags</label>
+        <div>
+        @foreach ($tags as $tag)
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="tags[]" id="tag{{ $tag->id }}" value="{{ $tag->id }}" {{ in_array($tag->id, $product->tags->pluck('id')->toArray()) ? 'checked' : '' }}>
+                <label class="form-check-label" for="tag{{ $tag->id }}">{{ $tag->name }}</label>
+            </div>
+        @endforeach
         </div>
-        <div class="mb-3">
-          <label for="" class="form-label">Price</label>
-          <input type="text"
-            class="form-control" name="price" id="price" aria-describedby="helpId" placeholder="" value="{{$product->price}}">
-        </div>
-        <div class="mb-3">
-          <label for="" class="form-label">Description</label>
-          <textarea class="form-control" name="description" id="description" rows="3">{{$product->price}}</textarea>
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+      <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <textarea class="form-control" name="description" id="description" rows="3">{{$product->description}}</textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
     </form>
   </main>
   <footer>
