@@ -8,6 +8,7 @@
               <th scope="col">Name</th>
               <th scope="col">Price</th>
               <th scope="col">Description</th>
+              <th scope="col">Image</th>
               <th>Category</th>
               <th>Tags</th>
               <th>Action</th>
@@ -21,6 +22,9 @@
                   </td>
                   <td>{{ $product->price }}</td>
                   <td>{{ $product->description }}</td>
+                  <td>
+                    <img src="{{ asset($product->image) }}"  width="100">
+                    </td>
                   <td>{{ $product->category->name }}</td>
                   <td>
                       @foreach ($product->tags as $tag)
