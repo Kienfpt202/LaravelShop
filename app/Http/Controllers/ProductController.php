@@ -45,7 +45,7 @@ class ProductController extends Controller
      */
     public function show(string $id)
     {
-        $product = product::find($id);
+        $product = Product::find($id);
         return view('products.show', compact('product'));
     }
 
@@ -54,7 +54,7 @@ class ProductController extends Controller
      */
     public function edit(string $id)
     {
-        $product = product::find($id);
+        $product = Product::find($id);
         $categories = Category::all();
         $tags = Tag::all();
         return view('products.edit', compact('product', 'categories','tags'
@@ -66,7 +66,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $product = product::find($id);
+        $product = Product::find($id);
         $product->update($request->all());
         $product->tags()->sync($request->tags);
         return redirect()->route('products.index');
@@ -77,7 +77,7 @@ class ProductController extends Controller
      */
     public function destroy(string $id)
     {
-        $product = product::find($id);
+        $product = Product::find($id);
         $product->delete();
         return redirect()->route('products.index');
     }
@@ -87,7 +87,7 @@ class ProductController extends Controller
      */
     public function search(Request $request)
     {
-        $products = product::where('title', 'like', '%' . $request->search . '%')->get();
+        $products = Product::where('title', 'like', '%' . $request->search . '%')->get();
         return view('products.index', compact('products'));
     }
 }
