@@ -23,7 +23,7 @@
                   <td>{{ $product->price }}</td>
                   <td>{{ $product->description }}</td>
                   <td>
-                    <img src="{{ asset($product->images) }}"  width="100">
+                    <img src="{{ asset($product->image) }}"  width="100">
                     </td>
                   <td>{{ $product->category->name }}</td>
                   <td>

@@ -34,12 +34,20 @@ class ProductController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        dd($request->all());
-        $product = product::create($request->all());
-        $product->tags()->attach($request->tags);
-        return redirect()->route('products.index');
+{
+    $product = new Product($request->all());
+
+    // Di chuyển và lưu trữ hình ảnh
+    if ($request->hasFile('image')) {
+        $imageName = time() . '.' . $request->file('image')->getClientOriginalExtension();
+        $imagePath = $request->file('image')->move(public_path('images'), $imageName);
+        $product->image = 'images/' . $imageName;
     }
+
+    $product->save();
+    $product->tags()->attach($request->tags);
+    return redirect()->route('products.index');
+}
 
     /**
      * Display the specified resource.
