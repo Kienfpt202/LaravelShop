@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
+Route::get('/', [ProductController::class, 'home'])->name('products.home');
 
 // Route hiển thị sản phẩm
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
