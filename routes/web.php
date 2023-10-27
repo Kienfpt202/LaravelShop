@@ -86,3 +86,7 @@ Route::put('/tags/{id}', [TagController::class, 'update'])->name('tags.update');
 
 // Xóa tag
 Route::delete('/tags/{id}', [TagController::class, 'destroy'])->name('tags.destroy');
+
+// test comment
+
+//test 22222
