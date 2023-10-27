@@ -9,6 +9,11 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+    public function home()
+    {
+        $products = Product::all();
+        return view('homepage', compact('products'));
+    }
     /**
      * Display a listing of the resource.
      */
