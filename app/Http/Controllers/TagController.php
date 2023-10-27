@@ -57,9 +57,13 @@ class TagController extends Controller
         return redirect()->route('tags.index')->with('success', 'Tag updated successfully.');
     }
 
-    public function destroy(Tag $tag)
+    public function destroy(string $id)
     {
+        $tag = Tag::find($id);
         $tag->delete();
-    return redirect()->route('tags.index')->with('success', 'Tag deleted successfully.');
+        
+
+        return redirect()->route('categories.index')
+            ->with('success', 'Tag đã được xóa thành công.');
     }
 }

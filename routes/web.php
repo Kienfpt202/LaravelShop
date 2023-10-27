@@ -39,6 +39,9 @@ Route::put('/products/{id}', [ProductController::class, 'update'])->name('produc
 // Route xóa một sản phẩm
 Route::delete('/products/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
 
+//Route hiện thông tin chi tiết
+Route::get('/product/{id}/detail', [ProductController::class, 'detail'])->name('products.detail');
+
 // Route tìm kiếm sản phẩm theo tiêu đề
 Route::post('/products/search', [ProductController::class, 'search'])->name('products.search');
 
