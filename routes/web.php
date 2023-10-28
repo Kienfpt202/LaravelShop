@@ -87,6 +87,7 @@ Route::put('/tags/{id}', [TagController::class, 'update'])->name('tags.update');
 // Xóa tag
 Route::delete('/tags/{id}', [TagController::class, 'destroy'])->name('tags.destroy');
 
-// test comment
-
-//test 22222
+Route::get('/shopping-cart', [ProductController::class, 'Cart'])->name('shopping.cart');
+Route::get('/book/{id}', [ProductController::class, 'addToCart'])->name('addbook.to.cart');
+Route::patch('/update-shopping-cart', [ProductController::class, 'updateCart'])->name('update.sopping.cart');
+Route::delete('/delete-cart-product', [ProductController::class, 'deleteProductFromCart'])->name('delete.cart.product');

@@ -34,11 +34,14 @@
                         </li>
                     </ul>
                     <form class="d-flex">
-                        <button class="btn btn-outline-dark" type="submit">
+                        <a class="btn btn-outline-dark" href="{{ route('shopping.cart') }}">
+                            <i class="bi-cart-fill me-1" aria-hidden="true"></i> Cart <span class="badge bg-danger">{{ count((array) session('cart')) }}</span>
+                        </a>
+                        <!-- <button class="btn btn-outline-dark" type="submit">
                             <i class="bi-cart-fill me-1"></i>
                             Cart
                             <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
-                        </button>
+                        </button> -->
                     </form>
                 </div>
             </div>

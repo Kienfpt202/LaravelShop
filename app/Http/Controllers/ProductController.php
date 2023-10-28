@@ -109,6 +109,48 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
         return view('detail', compact('product'));
-        
+
+    }
+    public function Cart()
+    {
+        return view('cart');
+    }
+    public function addToCart($id)
+    {
+        $product = Product::findOrFail($id);
+        $cart = session()->get('cart', []);
+        if(isset($cart[$id])) {
+            $cart[$id]['quantity']++;
+        } else {
+            $cart[$id] = [
+                "name" => $product->name,
+                "quantity" => 1,
+                "price" => $product->price,
+                "image" => $product->image
+            ];
+        }
+        session()->put('cart', $cart);
+        return redirect()->back()->with('success', 'Product has been added to cart!');
+    }
+
+    public function updateCart(Request $request)
+    {
+        if($request->id && $request->quantity){
+            $cart = session()->get('cart');
+            $cart[$request->id]["quantity"] = $request->quantity;
+            session()->put('cart', $cart);
+            session()->flash('success', 'Product added to cart.');
+        }
+    }
+    public function deleteProductFromCart(Request $request)
+    {
+        if($request->id) {
+            $cart = session()->get('cart');
+            if(isset($cart[$request->id])) {
+                unset($cart[$request->id]);
+                session()->put('cart', $cart);
+            }
+            session()->flash('success', 'Project successfully deleted.');
+        }
     }
 }

@@ -40,7 +40,7 @@
                     </tr>
                     <tr class="text-center">
                         <th colspan="2">
-                            <form action="/order" method="post">
+                            <form action="cart" method="post">
                                 <input type="hidden" name="title" value="{{ $product->name }}">
                                 <input type="hidden" name="price" value="{{ $product->price }}">
                                 <input type="number" name="description" min="1" max="{{ $product->description }}">
