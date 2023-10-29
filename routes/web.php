@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\TagController;
 use Illuminate\Support\Facades\Route;
 
@@ -86,8 +87,13 @@ Route::put('/tags/{id}', [TagController::class, 'update'])->name('tags.update');
 
 // Xóa tag
 Route::delete('/tags/{id}', [TagController::class, 'destroy'])->name('tags.destroy');
-
-Route::get('/shopping-cart', [ProductController::class, 'Cart'])->name('shopping.cart');
-Route::get('/book/{id}', [ProductController::class, 'addToCart'])->name('addbook.to.cart');
-Route::patch('/update-shopping-cart', [ProductController::class, 'updateCart'])->name('update.sopping.cart');
+// hiển thị cart
+Route::get('/shopping-cart', [ProductController::class, 'cart'])->name('shopping.cart');
+//thêm sản phẩm vào cart
+Route::get('/product/{id}', [ProductController::class, 'addToCart'])->name('add.to.cart');
+//cập nhật cart
+Route::post('/update-shopping-cart', [ProductController::class, 'updateCart'])->name('update.sopping.cart');
+//xóa sản phẩm trong cart
 Route::delete('/delete-cart-product', [ProductController::class, 'deleteProductFromCart'])->name('delete.cart.product');
+//Thanh toán VNPAY
+Route::post('/vnpay_payment',[PaymentController::class, 'vnpay_payment']);

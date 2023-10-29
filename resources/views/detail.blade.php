@@ -1,6 +1,6 @@
 @extends('layouts_user')
-
 @section('content')
+@csrf
     <style>
         .red-text {
             color: red;
@@ -12,7 +12,7 @@
         <div class="row">
             <div class="col">
                 <img src="{{ asset($product->image) }}"  width="350">
-             </div>
+            </div>
             <div class="col">
                 <table class="table table-bordered">
                     <tr>
@@ -40,12 +40,13 @@
                     </tr>
                     <tr class="text-center">
                         <th colspan="2">
-                            <form action="cart" method="post">
-                                <input type="hidden" name="title" value="{{ $product->name }}">
-                                <input type="hidden" name="price" value="{{ $product->price }}">
-                                <input type="number" name="description" min="1" max="{{ $product->description }}">
-                                <input type="submit" class="btn btn-primary" value="ORDER"></input>
-                            </form>
+                        <form action="/shopping-cart" method="get">
+                            @csrf
+                            <input type="hidden" name="title" value="{{ $product->name }}">
+                            <input type="hidden" name="price" value="{{ $product->price }}">
+                            <input type="number" name="quantity" min="1" max="{{ $product->description }}">
+                            <input type="submit" class="btn btn-primary" value="ORDER"></input>
+                        </form>
                         </th>
                     </tr>
                 </table>

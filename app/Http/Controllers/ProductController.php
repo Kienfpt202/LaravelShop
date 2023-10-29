@@ -111,27 +111,28 @@ class ProductController extends Controller
         return view('detail', compact('product'));
 
     }
-    public function Cart()
+    public function cart()
     {
         return view('cart');
     }
-    public function addToCart($id)
-    {
-        $product = Product::findOrFail($id);
-        $cart = session()->get('cart', []);
-        if(isset($cart[$id])) {
-            $cart[$id]['quantity']++;
-        } else {
-            $cart[$id] = [
-                "name" => $product->name,
-                "quantity" => 1,
-                "price" => $product->price,
-                "image" => $product->image
-            ];
-        }
-        session()->put('cart', $cart);
-        return redirect()->back()->with('success', 'Product has been added to cart!');
+    public function addToCart(string $id)
+{
+    $product = Product::findOrFail($id);
+    $cart = session()->get('cart', []);
+
+    if (isset($cart[$id])) {
+        $cart[$id]['quantity']++;
+    } else {
+        $cart[$id] = [
+            "name" => $product->name,
+            "quantity" => 1,
+            "price" => $product->price,
+            "image" => $product->image
+        ];
     }
+    session()->put('cart', $cart);
+    return redirect()->back()->with('success', 'Product has been added to cart!');
+}
 
     public function updateCart(Request $request)
     {
