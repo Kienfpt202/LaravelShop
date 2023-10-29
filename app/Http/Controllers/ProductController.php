@@ -111,28 +111,27 @@ class ProductController extends Controller
         return view('detail', compact('product'));
 
     }
-    public function cart()
+    public function Cart()
     {
         return view('cart');
     }
-    public function addToCart(string $id)
-{
-    $product = Product::findOrFail($id);
-    $cart = session()->get('cart', []);
-
-    if (isset($cart[$id])) {
-        $cart[$id]['quantity']++;
-    } else {
-        $cart[$id] = [
-            "name" => $product->name,
-            "quantity" => 1,
-            "price" => $product->price,
-            "image" => $product->image
-        ];
+    public function addToCart($id)
+    {
+        $product = Product::findOrFail($id);
+        $cart = session()->get('cart', []);
+        if(isset($cart[$id])) {
+            $cart[$id]['quantity']++;
+        } else {
+            $cart[$id] = [
+                "name" => $product->name,
+                "quantity" =>1,
+                "price" => $product->price,
+                "image" => $product->image
+            ];
+        }
+        session()->put('cart', $cart);
+        return redirect()->back()->with('success', 'product has been added to cart!');
     }
-    session()->put('cart', $cart);
-    return redirect()->back()->with('success', 'Product has been added to cart!');
-}
 
     public function updateCart(Request $request)
     {
@@ -140,10 +139,11 @@ class ProductController extends Controller
             $cart = session()->get('cart');
             $cart[$request->id]["quantity"] = $request->quantity;
             session()->put('cart', $cart);
-            session()->flash('success', 'Product added to cart.');
+            session()->flash('success', 'product added to cart.');
         }
     }
-    public function deleteProductFromCart(Request $request)
+
+    public function deleteCart(Request $request)
     {
         if($request->id) {
             $cart = session()->get('cart');
@@ -151,7 +151,8 @@ class ProductController extends Controller
                 unset($cart[$request->id]);
                 session()->put('cart', $cart);
             }
-            session()->flash('success', 'Project successfully deleted.');
+            session()->flash('success', 'product successfully deleted.');
         }
+        return view('cart');
     }
 }

@@ -88,12 +88,12 @@ Route::put('/tags/{id}', [TagController::class, 'update'])->name('tags.update');
 // Xóa tag
 Route::delete('/tags/{id}', [TagController::class, 'destroy'])->name('tags.destroy');
 // hiển thị cart
-Route::get('/shopping-cart', [ProductController::class, 'cart'])->name('shopping.cart');
+Route::get('/shopping-cart', [ProductController::class, 'Cart'])->name('shopping.cart');
 //thêm sản phẩm vào cart
-Route::get('/product/{id}', [ProductController::class, 'addToCart'])->name('add.to.cart');
+Route::get('/products/{id}/add_to_cart', [ProductController::class, 'addToCart'])->name('add.to.cart');
 //cập nhật cart
 Route::post('/update-shopping-cart', [ProductController::class, 'updateCart'])->name('update.sopping.cart');
 //xóa sản phẩm trong cart
-Route::delete('/delete-cart-product', [ProductController::class, 'deleteProductFromCart'])->name('delete.cart.product');
+Route::delete('/products/{id}/delete_cart', [ProductController::class, 'deleteCart'])->name('delete.cart');
 //Thanh toán VNPAY
 Route::post('/vnpay_payment',[PaymentController::class, 'vnpay_payment']);
