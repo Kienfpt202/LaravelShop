@@ -2,6 +2,10 @@
 @section('title', 'Products Index')
 @section('content')
 <div class="table-responsive">
+<div class="mb-3">
+    <a href="{{ route('products.price', ['order' => 'asc']) }}" class="btn btn-primary">Sort by Price (Asc)</a>
+    <a href="{{ route('products.price', ['order' => 'desc']) }}" class="btn btn-primary">Sort by Price (Desc)</a>
+  </div>
   <table class="table table-primary">
       <thead>
           <tr>
