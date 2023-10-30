@@ -34,19 +34,20 @@
                         </li>
                     </ul>
                     <form class="d-flex">
+                        @if(auth()->check())
+                            <a class="btn btn-outline-dark" href="{{ route('logout') }}">Logout</a>
+                        @else
+                            <a class="btn btn-outline-dark me-2" href="{{ route('login') }}">Login</a>
+                            <a class="btn btn-outline-dark" href="{{ route('register') }}">Register</a>
+                        @endif
                         <a class="btn btn-outline-dark" href="{{ route('shopping.cart') }}">
                             <i class="bi-cart-fill me-1" aria-hidden="true"></i> Cart <span class="badge bg-danger">{{ count((array) session('cart')) }}</span>
                         </a>
-                        <!-- <button class="btn btn-outline-dark" type="submit">
-                            <i class="bi-cart-fill me-1"></i>
-                            Cart
-                            <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
-                        </button> -->
                     </form>
                 </div>
             </div>
         </nav>
-       @yield('content')
+        @yield('content')
         <!-- Footer-->
         <footer class="py-5 bg-dark">
             <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2023</p></div>

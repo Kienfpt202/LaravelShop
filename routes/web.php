@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthentificationController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PaymentController;
@@ -95,5 +96,21 @@ Route::get('/products/{id}/add_to_cart', [ProductController::class, 'addToCart']
 Route::post('/update-shopping-cart', [ProductController::class, 'updateCart'])->name('update.sopping.cart');
 //xóa sản phẩm trong cart
 Route::delete('/products/{id}/delete_cart', [ProductController::class, 'deleteCart'])->name('delete.cart');
-//Thanh toán VNPAY
-Route::post('/vnpay_payment',[PaymentController::class, 'vnpay_payment']);
+//Kiểm tra đăng nhập
+Route::get('/success', function () {
+    if (!auth()->check()) {
+        return redirect()->route('login');
+    }
+    return view('success');
+})->name('success');
+
+// Route for login
+Route::get('/login', [AuthentificationController::class, 'login'])->name('login');
+Route::post('/login', [AuthentificationController::class, 'doLogin'])->name('login');
+
+// Route for register
+Route::get('/register', [AuthentificationController::class, 'register'])->name('register');
+Route::post('/register', [AuthentificationController::class, 'doRegister'])->name('register');
+
+// Route for logout
+Route::get('/logout', [AuthentificationController::class, 'logout'])->name('logout');
