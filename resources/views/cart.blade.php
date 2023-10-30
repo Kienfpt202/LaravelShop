@@ -1,7 +1,10 @@
 @extends('layouts_user')
 
 @section('content')
-<table id="cart" class="table table-bordered">
+@if(auth()->check())
+        <p>Welcome, {{ auth()->user()->name }}</p>
+        <!-- Hiển thị nội dung giỏ hàng -->
+        <table id="cart" class="table table-bordered">
     <thead>
         <tr>
             <th>Product</th>
@@ -58,4 +61,20 @@
         </tr>
     </tfoot>
 </table>
+    @else
+    <style>
+    .cart-message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    background-color: #f8f8f8;
+    border: 4px solid red;
+    border-radius: 5px;
+    font-size: 40px;
+    color: #141414;
+    }
+</style>
+    <p class="cart-message">Please log in to view your cart!</p>
+    @endif
 @endsection

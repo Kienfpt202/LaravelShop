@@ -10823,4 +10823,15 @@ textarea.form-control-lg {
   .d-print-none {
     display: none !important;
   }
+  .cart-message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    background-color: #f8f8f8;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 18px;
+    color: #888;
+  }
 }
