@@ -40,6 +40,12 @@
                     <td>{{ $product->description }}</td>
                 </tr>
                 <tr class="text-center">
+                <th colspan="2">
+                    <!-- Nút để tải xuống file txt -->
+                    <a href="{{ route('product.download', $product->id) }}" class="btn btn-outline-primary">Download Info</a>
+                </th>
+            </tr>
+                <tr class="text-center">
                     <th colspan="2">
                         <form action="/shopping-cart" method="get">
                             @csrf

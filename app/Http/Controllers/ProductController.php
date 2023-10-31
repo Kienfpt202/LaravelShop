@@ -6,6 +6,8 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Response;
 
 class ProductController extends Controller
 {
@@ -154,5 +156,42 @@ class ProductController extends Controller
             session()->flash('success', 'product successfully deleted.');
         }
         return view('cart');
+    }
+
+    /**
+     * Display products in ascending order of price.
+     */
+    public function showByPrice($order = 'asc')
+    {
+        $products = Product::orderBy('price', $order)->get();
+        return view('products.index', compact('products', 'order'));
+    }
+
+    public function download($id)
+    {
+        $product = Product::findOrFail($id);
+    
+        // Tạo nội dung cho file txt
+        $text = "Product Name: " . $product->name . "\n";
+        $text .= "Price: $" . $product->price . "\n";
+        $text .= "Category: " . $product->category->name . "\n";
+        $text .= "Tags: ";
+        foreach ($product->tags as $tag) {
+            $text .= $tag->name . ", ";
+        }
+        $text .= "\n";
+        $text .= "Description: " . $product->description . "\n";
+    
+        // Đặt tên file
+        $fileName = $product->name . '.txt';
+    
+        // Lưu file vào thư mục storage/app/public
+        Storage::disk('public')->put($fileName, $text);
+    
+        // Đường dẫn đến file
+        $filePath = storage_path('app/public/' . $fileName);
+    
+        // Trả về file để tải xuống
+        return Response::download($filePath);
     }
 }

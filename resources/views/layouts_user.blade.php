@@ -32,6 +32,13 @@
                                 <li><a class="dropdown-item" href="#!">New Arrivals</a></li>
                             </ul>
                         </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Sort</a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="{{ route('products.price', ['order' => 'desc']) }}">Sort by Price (Desc)</a></li>
+                                <li><a class="dropdown-item" href="{{ route('products.price', ['order' => 'asc']) }}">Sort by Price (Asc)</a></li>
+                            </ul>
+                        </li>
                     </ul>
                     <form class="d-flex">
                         @if(auth()->check())

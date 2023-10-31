@@ -121,3 +121,10 @@ Route::post('/register', [AuthentificationController::class, 'doRegister'])->nam
 
 // Route for logout
 Route::get('/logout', [AuthentificationController::class, 'logout'])->name('logout');
+
+// Route hiển thị tăng giảm giá sản phẩm
+Route::get('/products/price/{order?}', [ProductController::class, 'showByPrice'])->name('products.price');
+
+// Route download file
+Route::get('/product/{id}/download', [ProductController::class, 'download'])->name('product.download');
+
