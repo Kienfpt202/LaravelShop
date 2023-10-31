@@ -110,7 +110,11 @@ Route::post('/users', [AuthentificationController::class, 'store'])->name('users
 Route::get('/users/{id}', [AuthentificationController::class, 'show'])->name('users.show');
 
 Route::get('/users', [AuthentificationController::class, 'index'])->name('users.index');
+// Route hiển thị form chỉnh sửa thông tin user
+Route::get('/users/{id}/edit', [AuthentificationController::class, 'edit'])->name('users.edit');
 
+// Route cập nhật thông tin user chỉnh sửa
+Route::put('/users/{id}', [AuthentificationController::class, 'update'])->name('users.update');
 // Route for login
 Route::get('/login', [AuthentificationController::class, 'login'])->name('login');
 Route::post('/login', [AuthentificationController::class, 'doLogin'])->name('login');

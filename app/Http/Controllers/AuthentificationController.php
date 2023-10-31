@@ -24,8 +24,23 @@ class AuthentificationController extends Controller
          */
     public function show(string $id)
     {
-        $product = User::find($id);
+        $user = User::find($id);
         return view('users.show', compact('user'));
+    }
+    public function edit(string $id)
+    {
+        $user = User::find($id);
+        return view('users.edit', compact('user',));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
+    {
+        $user = User::find($id);
+        $user->update($request->all());
+        return redirect()->route('users.index');
     }
     // Login view
     public function login()
