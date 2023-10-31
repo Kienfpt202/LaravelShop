@@ -104,6 +104,13 @@ Route::get('/success', function () {
     return view('success');
 })->name('success');
 
+Route::post('/users', [AuthentificationController::class, 'store'])->name('users.store');
+
+// Route hiển thị thông tin chi tiết về một người dùng
+Route::get('/users/{id}', [AuthentificationController::class, 'show'])->name('users.show');
+
+Route::get('/users', [AuthentificationController::class, 'index'])->name('users.index');
+
 // Route for login
 Route::get('/login', [AuthentificationController::class, 'login'])->name('login');
 Route::post('/login', [AuthentificationController::class, 'doLogin'])->name('login');

@@ -8,6 +8,25 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthentificationController extends Controller
 {
+    public function index()
+    {
+        $users = User::all();
+        return view('users.index', compact('users'));
+    }
+    public function store(Request $request)
+    {
+        $user = new User($request->all());
+        $user->save();
+        return redirect()->route('users.index');
+    }
+        /**
+         * Display the specified resource.
+         */
+    public function show(string $id)
+    {
+        $product = User::find($id);
+        return view('users.show', compact('user'));
+    }
     // Login view
     public function login()
     {
