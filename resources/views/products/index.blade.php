@@ -24,7 +24,7 @@
                   <td>
                       <a href="/products/{{$product->id}}">{{$product->name}}</a>
                   </td>
-                  <td>{{ $product->price }}</td>
+                  <td>${{ $product->price }}</td>
                   <td>{{ $product->description }}</td>
                   <td>
                     <img src="{{ asset($product->image) }}"  width="100">

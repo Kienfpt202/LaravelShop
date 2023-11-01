@@ -20,9 +20,15 @@
   <main>
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title">{{$product->name}}</h4>
-            <h5 class="card-title">{{$product->price}}</h5>
-            <p class="card-text">{{$product->description}}</p>
+            <h4 class="card-title">Name: {{$product->name}}</h4>
+            <h5 class="card-title">Price: ${{$product->price}}</h5>
+            <h5 class="card-title">Category:{{ $product->category->name }}</h5>
+            <td>
+                @foreach ($product->tags as $tag)
+                    <span class="badge bg-primary">Tags:{{ $tag->name }}</span>
+                @endforeach
+            </td>
+            <p class="card-text">Description: {{$product->description}}</p>
         </div>
     </div>
   </main>
