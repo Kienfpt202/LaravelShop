@@ -50,16 +50,31 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Category $category)
+    public function edit(string $id)
     {
+        $category = Category::find($id);
+
+        if (!$category) {
+        // Xử lý khi không tìm thấy danh mục với id tương ứng
+            return redirect()->route('categories.index')
+                ->with('error', 'Không tìm thấy danh mục.');
+        }
+
         return view('categories.edit', compact('category'));
     }
-
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request, string $id)
     {
+        $category = Category::find($id);
+
+        if (!$category) {
+        // Xử lý khi không tìm thấy danh mục với id tương ứng
+            return redirect()->route('categories.index')
+                ->with('error', 'Không tìm thấy danh mục.');
+        }
+
         $validatedData = $request->validate([
             'name' => 'required|max:255|unique:categories,name,' . $category->id,
         ]);
@@ -77,7 +92,7 @@ class CategoryController extends Controller
     {
         $categories = Category::find($id);
         $categories->delete();
-        
+
 
         return redirect()->route('categories.index')
             ->with('success', 'Danh mục đã được xóa thành công.');
